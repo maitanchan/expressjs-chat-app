@@ -6,9 +6,10 @@ export const chatTextAi = async (req, res) => {
 
     try {
 
-        const { text, activeChatId } = req.body;
+        const { text, activeChatId } = req.body
 
         const response = await openai.createChatCompletion(
+
             {
 
                 model: "gpt-3.5-turbo",
@@ -16,11 +17,13 @@ export const chatTextAi = async (req, res) => {
                 messages: [
 
                     { role: "system", content: "AI text" },
-                    { role: "user", content: text },
 
-                ],
+                    { role: "user", content: text }
+
+                ]
 
             }
+
         )
 
         await axios.post(
@@ -36,8 +39,8 @@ export const chatTextAi = async (req, res) => {
                     "User-Name": process.env.BOT_USER_NAME,
                     "User-Secret": process.env.BOT_USER_SECRET,
 
-                },
-            },
+                }
+            }
 
         )
 
@@ -46,6 +49,7 @@ export const chatTextAi = async (req, res) => {
     } catch (error) {
 
         console.error("error", error.response.data.error)
+
         res.status(500).json({ error: error.message })
 
     }
@@ -60,22 +64,21 @@ export const chatCodeAi = async (req, res) => {
         const { text, activeChatId } = req.body
 
         const response = await openai.createChatCompletion(
+
             {
 
                 model: "gpt-3.5-turbo",
 
                 messages: [
 
-                    {
-                        role: "system",
-                        content: "AI code",
-                    },
+                    { role: "system", content: "AI code" },
 
                     { role: "user", content: text }
 
-                ],
+                ]
 
             }
+
         )
 
         await axios.post(
@@ -85,14 +88,16 @@ export const chatCodeAi = async (req, res) => {
             { text: response.data.choices[0].message.content },
 
             {
+
                 headers: {
 
                     "Project-ID": process.env.PROJECT_ID,
                     "User-Name": process.env.BOT_USER_NAME,
-                    "User-Secret": process.env.BOT_USER_SECRET,
+                    "User-Secret": process.env.BOT_USER_SECRET
 
-                },
-            },
+                }
+
+            }
 
         )
 
@@ -101,6 +106,7 @@ export const chatCodeAi = async (req, res) => {
     } catch (error) {
 
         console.error("error", error.response.data.error)
+
         res.status(500).json({ error: error.message })
 
     }

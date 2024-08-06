@@ -19,8 +19,8 @@ export const signup = async (req, res) => {
 
                     "Private-Key": process.env.PRIVATE_KEY
 
-                },
-            },
+                }
+            }
 
         )
 
@@ -29,6 +29,7 @@ export const signup = async (req, res) => {
     } catch (error) {
 
         console.error("error", error.message)
+
         res.status(500).json({ error: error.message })
 
     }
@@ -45,6 +46,7 @@ export const login = async (req, res) => {
         const chatEngineResponse = await axios.get(
 
             "https://api.chatengine.io/users/me",
+
             {
                 headers: {
 
@@ -52,8 +54,9 @@ export const login = async (req, res) => {
                     "User-Name": username,
                     "User-Secret": password,
 
-                },
-            },
+                }
+
+            }
 
         )
 
@@ -62,6 +65,7 @@ export const login = async (req, res) => {
     } catch (error) {
 
         console.error("error", error)
+
         res.status(500).json({ error: error.message })
 
     }
